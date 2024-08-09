@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { League_Spartan } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { MyThemeProvider, StyledComponentsRegistry } from "@/helpers/lib";
 
-const inter = League_Spartan({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   display: "swap",

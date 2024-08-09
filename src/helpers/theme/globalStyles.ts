@@ -2,9 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-     color-scheme: light dark;
-     color: #fff;
-     background-color: #040518;
      font-synthesis: none;
      text-rendering: optimizeLegibility;
      -webkit-font-smoothing: antialiased;
@@ -21,12 +18,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: "League Spartan", sans-serif;
+    font-family: "Intern", sans-serif;
     font-weight: ${(props) => props.theme.fontWeight.normal};
+    font-size: ${(props) => props.theme.fontSize.sm};
+    color: ${(props) => props.theme.color.dark};
     font-style: normal;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
+
   a {
     color: inherit;
     text-decoration: none;

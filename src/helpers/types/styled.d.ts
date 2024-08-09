@@ -5,7 +5,7 @@ export interface FontSize {
   sm: string;
   md: string;
   lg: string;
-  xlg: string;
+  xl: string;
 }
 export interface FontWeight {
   normal: number;
@@ -22,7 +22,15 @@ declare module "styled-components" {
       fontSize: FontSize;
     };
     color: {
-      gradient1: string;
+      brand: string;
+      dark: string;
+      light: string;
+      gray: string;
+    };
+    animation: {
+      medium: string;
+      fast: string;
+      slow: string;
     };
   }
 }
