@@ -6,12 +6,22 @@ export interface FontSize {
   md: string;
   lg: string;
   xl: string;
+  xxl: string;
 }
+
 export interface FontWeight {
   normal: number;
   bold: number;
   semiBold: number;
   medium: number;
+}
+
+export interface Color {
+  "brand-dark": string;
+  "brand-light": string;
+  dark: string;
+  light: string;
+  gray: string;
 }
 
 declare module "styled-components" {
@@ -21,12 +31,7 @@ declare module "styled-components" {
     mobile: {
       fontSize: FontSize;
     };
-    color: {
-      brand: string;
-      dark: string;
-      light: string;
-      gray: string;
-    };
+    color: Color;
     animation: {
       medium: string;
       fast: string;

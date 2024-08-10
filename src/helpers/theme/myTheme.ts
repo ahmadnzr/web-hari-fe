@@ -13,6 +13,7 @@ export const myTheme: DefaultTheme = {
     md: "1.2rem",
     lg: "1.44rem",
     xl: "1.728rem",
+    xxl: "4rem",
   },
   mobile: {
     fontSize: {
@@ -21,17 +22,19 @@ export const myTheme: DefaultTheme = {
       md: "1.2rem",
       lg: "1.44rem",
       xl: "1.728rem",
+      xxl: "4rem",
     },
   },
   color: {
-    brand: "#fc7540",
+    "brand-dark": "rgb(255, 146, 104)",
+    "brand-light": "rgb(249, 92, 31)",
     dark: "#131315",
     light: "#fff",
-    gray: "#B3B3B9",
+    gray: "#c4c4c4",
   },
   animation: {
-    medium: "0.3s ease",
-    fast: "0.1s ease",
+    medium: "0.5s ease",
+    fast: "0.3s ease",
     slow: "1s ease",
   },
 };
