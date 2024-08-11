@@ -139,7 +139,6 @@ const NavItem = styled.div<{ $width?: string; $active?: boolean }>`
 
 const Hero = styled.section`
   width: 95%;
-  min-height: 920px;
   margin: 0 auto;
   padding: 24px;
   display: flex;
@@ -173,6 +172,7 @@ const HeroHighlight = styled.div`
 `;
 
 const HeroCard = styled.div<{ $url?: string }>`
+  height: 615px;
   flex: 1;
 
   display: flex;
