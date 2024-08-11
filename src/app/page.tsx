@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
-import { Button, Text } from "@/components";
+import { Button, SectionTitle, Text } from "@/components";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
@@ -103,6 +103,26 @@ export default function Home() {
           </HeroCard>
         </HeroHighlight>
       </Hero>
+      <AboutMe>
+        <AboutContent>
+          <SectionTitle>About Me</SectionTitle>
+          <Image
+            className="about_photo"
+            src="https://dstudiosphotography.com/wp-content/uploads/2019/01/Corporate-Headshots-3-square.jpg"
+            alt="photo"
+            height={230}
+            width={230}
+          />
+        </AboutContent>
+        <AboutContent>
+          <Text $size="xl" $weight="semiBold">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry&apos;s standard dummy
+            text ever since the 1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book.
+          </Text>
+        </AboutContent>
+      </AboutMe>
     </main>
   );
 }
@@ -137,9 +157,12 @@ const NavItem = styled.div<{ $width?: string; $active?: boolean }>`
   }
 `;
 
-const Hero = styled.section`
+const Container = styled.section`
   width: 95%;
   margin: 0 auto;
+`;
+
+const Hero = styled(Container)`
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -246,4 +269,24 @@ const BtnIcon = styled(ArrowRightIcon)`
   width: 18px;
 
   color: ${(props) => props.theme.color["brand-dark"]};
+`;
+
+const AboutMe = styled(Container)`
+  height: 750px;
+  padding: 0 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .about_photo {
+    margin-top: 1rem;
+    width: 230px;
+    height: 230px;
+    border-radius: 230px;
+    object-fit: cover;
+  }
+`;
+
+const AboutContent = styled.div`
+  flex: 1;
 `;
