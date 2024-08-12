@@ -187,6 +187,85 @@ export default function Home() {
           </ProjectCard>
         </Project>
       </Service>
+      <Review>
+        <div className="review_title">
+          <SectionTitle>Past Client</SectionTitle>
+          <SlideButton>
+            <NavigationButton $type="prev" $dark>
+              <ChevronRightIcon className="nav-btn_icon" />
+            </NavigationButton>
+            <NavigationButton $type="next" $dark>
+              <ChevronRightIcon className="nav-btn_icon" />
+            </NavigationButton>
+          </SlideButton>
+        </div>
+        <ReviewItem>
+          <Text className="review_text" $size="xl" $weight="semiBold">
+            Hari transformed our brand identity and website into a modern, sleek
+            and professional representation of our company. Their design skills
+            are second to none
+          </Text>
+          <ReviewUser>
+            <ReviewAvatar></ReviewAvatar>
+            <div>
+              <Text $weight="semiBold" $size="md">
+                Ahmad Nizar
+              </Text>
+              <Text $size="xs" $color="gray">
+                Software Engineer
+              </Text>
+            </div>
+          </ReviewUser>
+        </ReviewItem>
+      </Review>
+      <Footer>
+        <FooterTitle>
+          <Text className="footer_title" $size="xxl" $weight="semiBold">
+            Have a Cool Project ?
+          </Text>
+          <Button text="Contact Me" />
+        </FooterTitle>
+        <FooterDetail>
+          <Avatar>
+            <Image
+              className="footer_photo"
+              src="https://dstudiosphotography.com/wp-content/uploads/2019/01/Corporate-Headshots-3-square.jpg"
+              alt="photo"
+              height={90}
+              width={90}
+            />
+            <Text $size="md">Visual Designer Based in Indonesia</Text>
+          </Avatar>
+          <FooterMenu>
+            <FooterMenuItem>
+              <Text $size="md">Navigation</Text>
+              <Text $color="gray">Home</Text>
+              <Text $color="gray">About</Text>
+              <Text $color="gray">Expertise</Text>
+              <Text $color="gray">Work</Text>
+            </FooterMenuItem>
+            <FooterMenuItem>
+              <Text $size="md">Services</Text>
+              <Text $color="gray">Branding</Text>
+              <Text $color="gray">UI/UX Design</Text>
+              <Text $color="gray">Development</Text>
+              <Text $color="gray">Digital Marketing</Text>
+            </FooterMenuItem>
+            <FooterMenuItem>
+              <Text $size="md">Socials</Text>
+              <Text $color="gray">Dribble</Text>
+              <Text $color="gray">Twitter (X)</Text>
+              <Text $color="gray">Instagram</Text>
+              <Text $color="gray">Linkedin</Text>
+            </FooterMenuItem>
+          </FooterMenu>
+        </FooterDetail>
+        <FooterCopy>
+          <Text $size="xs" className="footer_copy" $color="gray">
+            2024 | Ahmad Nizar
+          </Text>
+        </FooterCopy>
+      </Footer>
     </main>
   );
 }
@@ -223,11 +302,11 @@ const NavItem = styled.div<{ $width?: string; $active?: boolean }>`
 
 const Container = styled.section`
   width: 95%;
+  padding: 24px;
   margin: 0 auto;
 `;
 
 const DarkContainer = styled(Container)`
-  padding: 24px;
   border-radius: 40px;
 
   color: ${(props) => props.theme.color.light};
@@ -394,12 +473,16 @@ const SlideButton = styled.div`
   }
 `;
 
-const NavigationButton = styled.button<{ $type?: "prev" | "next" }>`
+const NavigationButton = styled.button<{
+  $type?: "prev" | "next";
+  $dark?: boolean;
+}>`
   width: 32px;
   height: 32px;
   border-radius: 32px;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: ${(props) =>
+    props.$dark ? "rgba(0, 0, 0, 0.4)" : "rgba(255, 255, 255, 0.4);"};
   opacity: 0.5;
   cursor: pointer;
   transform: ${(props) =>
@@ -490,4 +573,118 @@ const ProjectButton = styled.button`
       transform: rotate(-45deg);
     }
   }
+`;
+
+const Review = styled(Container)`
+  margin: 8rem 0;
+  & .review_title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .review_text {
+    padding: 2rem 0;
+  }
+`;
+
+const ReviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const ReviewUser = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const ReviewAvatar = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background: gray;
+`;
+
+const Footer = styled(DarkContainer)`
+  width: 100%;
+  min-height: 900px;
+  margin-top: 2rem;
+  padding: 0 8rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 40px 40px 0 0;
+
+  & .footer_title {
+    line-height: 100%;
+  }
+
+  & .footer_copy {
+    opacity: 0.6;
+    letter-spacing: 0.1rem;
+  }
+
+  & .footer_photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 90px;
+  }
+`;
+
+const FooterTitle = styled.div`
+  width: 400px;
+  margin: 0 auto;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  text-align: center;
+`;
+
+const FooterDetail = styled.div`
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: 1px solid rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+`;
+
+const Avatar = styled.div`
+  width: 300px;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const FooterMenu = styled.div`
+  display: flex;
+  gap: 6rem;
+`;
+
+const FooterMenuItem = styled.div`
+  & :first-child {
+    padding-bottom: 1rem;
+  }
+
+  & :not(:first-child) {
+    padding-bottom: 0.8rem;
+  }
+`;
+
+const FooterCopy = styled.div`
+  padding: 2rem 0;
 `;
