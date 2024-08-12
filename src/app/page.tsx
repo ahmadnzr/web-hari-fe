@@ -187,6 +187,37 @@ export default function Home() {
           </ProjectCard>
         </Project>
       </Service>
+      <Review>
+        <div className="review_title">
+          <SectionTitle>Past Client</SectionTitle>
+          <SlideButton>
+            <NavigationButton $type="prev" $dark>
+              <ChevronRightIcon className="nav-btn_icon" />
+            </NavigationButton>
+            <NavigationButton $type="next" $dark>
+              <ChevronRightIcon className="nav-btn_icon" />
+            </NavigationButton>
+          </SlideButton>
+        </div>
+        <ReviewItem>
+          <Text className="review_text" $size="xl" $weight="semiBold">
+            Hari transformed our brand identity and website into a modern, sleek
+            and professional representation of our company. Their design skills
+            are second to none
+          </Text>
+          <ReviewUser>
+            <ReviewAvatar></ReviewAvatar>
+            <div>
+              <Text $weight="semiBold" $size="md">
+                Ahmad Nizar
+              </Text>
+              <Text $size="xs" $color="gray">
+                Software Engineer
+              </Text>
+            </div>
+          </ReviewUser>
+        </ReviewItem>
+      </Review>
       <Footer>
         <FooterTitle>
           <Text className="footer_title" $size="xxl" $weight="semiBold">
@@ -271,11 +302,11 @@ const NavItem = styled.div<{ $width?: string; $active?: boolean }>`
 
 const Container = styled.section`
   width: 95%;
+  padding: 24px;
   margin: 0 auto;
 `;
 
 const DarkContainer = styled(Container)`
-  padding: 24px;
   border-radius: 40px;
 
   color: ${(props) => props.theme.color.light};
@@ -442,12 +473,16 @@ const SlideButton = styled.div`
   }
 `;
 
-const NavigationButton = styled.button<{ $type?: "prev" | "next" }>`
+const NavigationButton = styled.button<{
+  $type?: "prev" | "next";
+  $dark?: boolean;
+}>`
   width: 32px;
   height: 32px;
   border-radius: 32px;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: ${(props) =>
+    props.$dark ? "rgba(0, 0, 0, 0.4)" : "rgba(255, 255, 255, 0.4);"};
   opacity: 0.5;
   cursor: pointer;
   transform: ${(props) =>
@@ -538,6 +573,37 @@ const ProjectButton = styled.button`
       transform: rotate(-45deg);
     }
   }
+`;
+
+const Review = styled(Container)`
+  margin: 8rem 0;
+  & .review_title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .review_text {
+    padding: 2rem 0;
+  }
+`;
+
+const ReviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const ReviewUser = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const ReviewAvatar = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background: gray;
 `;
 
 const Footer = styled(DarkContainer)`
