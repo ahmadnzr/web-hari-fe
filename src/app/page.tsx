@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import {
@@ -11,6 +11,7 @@ import {
   SectionTitle,
   Text,
 } from "@/components";
+import { mobile, tablet } from "@/helpers/theme";
 
 export default function Home() {
   return (
@@ -85,8 +86,7 @@ export default function Home() {
           <Text $size="xl" $weight="semiBold">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book.
+            text ever since the 1500s.
           </Text>
         </AboutContent>
       </AboutMe>
@@ -190,35 +190,55 @@ export default function Home() {
 }
 
 const Hero = styled(ContentDarkContainer)`
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 4rem;
+
+  ${mobile(css`
+    gap: 2rem;
+  `)}
 `;
 
 const HeroDetail = styled.div`
-  width: 800px;
-  margin: 60px auto 0;
+  max-width: 800px;
+  margin: 4rem auto 0;
   text-align: center;
 
   & .hero-title {
     line-height: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
   & .hero-desc {
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
   }
+
+  ${mobile(css`
+    width: 80%;
+    margin: 2rem auto 0;
+
+    & .hero-title {
+      margin-bottom: 0.5rem;
+    }
+    & .hero-desc {
+      margin-bottom: 1rem;
+    }
+  `)}
 `;
 
 const HeroHighlight = styled.div`
   width: 100%;
   flex: 1;
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
+
+  ${mobile(css`
+    flex-direction: column;
+    gap: 1rem;
+  `)}
 `;
 
 const HeroCard = styled.div<{ $url?: string }>`
-  height: 615px;
+  min-height: 400px;
   flex: 1;
 
   display: flex;
@@ -234,23 +254,31 @@ const HeroCard = styled.div<{ $url?: string }>`
     ),
     url(${(props) => props.$url});
   border-radius: 30px;
+
+  ${mobile(css`
+    min-height: 200px;
+  `)}
 `;
 
 const CardContent = styled.div`
   width: 100%;
-  padding: 30px;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: end;
+
+  ${mobile(css`
+    padding: 1rem;
+  `)}
 `;
 
 const CardButton = styled.button`
   position: relative;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 12px;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.6rem;
 
-  border-radius: 32px;
+  border-radius: 2rem;
 
   cursor: pointer;
   overflow: hidden;
@@ -261,7 +289,7 @@ const CardButton = styled.button`
   }
 
   & .card-btn_text {
-    margin-right: -120px;
+    margin-right: -10rem;
     white-space: nowrap;
   }
 
@@ -271,16 +299,18 @@ const CardButton = styled.button`
     bottom: 0;
     right: 0;
 
-    width: 20px;
-    height: 32px;
+    width: 1.5rem;
+    height: 2rem;
     background: ${(props) => props.theme.color.light};
   }
 
   &:hover {
     & .card-btn_text {
-      margin-right: 16px;
+      margin-right: 1.5rem;
     }
   }
+
+  ${mobile(css``)}
 `;
 
 const BtnIcon = styled(ArrowRightIcon)`
@@ -288,15 +318,15 @@ const BtnIcon = styled(ArrowRightIcon)`
   top: 5px;
   right: 6px;
 
-  height: 18px;
-  width: 18px;
+  height: 1.2rem;
+  width: 1.2rem;
 
   color: ${(props) => props.theme.color["brand-dark"]};
 `;
 
 const AboutMe = styled(ContentWrapper)`
-  height: 750px;
-  padding: 0 250px;
+  min-height: 750px;
+  padding: 0 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,6 +338,21 @@ const AboutMe = styled(ContentWrapper)`
     border-radius: 230px;
     object-fit: cover;
   }
+
+  ${tablet(css`
+    min-height: fit-content;
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+  `)}
+
+  ${mobile(css`
+    & .about_photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+    }
+  `)}
 `;
 
 const AboutContent = styled.div`
@@ -329,6 +374,13 @@ const Service = styled(ContentDarkContainer)`
     justify-content: space-between;
     align-items: center;
   }
+
+  ${mobile(css`
+    & .service_project-title {
+      text-align: left;
+      margin: 1rem 0;
+    }
+  `)}
 `;
 
 const ServiceMenu = styled.div`
@@ -336,6 +388,11 @@ const ServiceMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+  ${mobile(css`
+    margin: 2rem 0;
+    gap: 1rem;
+  `)}
 `;
 
 const Project = styled.div`
@@ -348,6 +405,10 @@ const SlideButton = styled.div`
   & > * {
     margin: 0 4px;
   }
+
+  ${mobile(css`
+    display: none;
+  `)}
 `;
 
 const NavigationButton = styled.button<{
@@ -377,7 +438,7 @@ const NavigationButton = styled.button<{
 
 const ProjectCard = styled.div<{ $url?: string }>`
   width: 100%;
-  height: 800px;
+  min-height: 800px;
   padding: 2rem;
 
   display: flex;
@@ -395,6 +456,11 @@ const ProjectCard = styled.div<{ $url?: string }>`
     url(${(props) => props.$url});
 
   border-radius: 30px;
+
+  ${mobile(css`
+    min-height: 400px;
+    padding: 1rem;
+  `)}
 `;
 
 const ProjectFooter = styled.div`
@@ -403,11 +469,19 @@ const ProjectFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  ${mobile(css`
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 1rem;
+  `)}
 `;
 
 const Desc = styled.div`
   display: flex;
   gap: 2rem;
+
   & .desc_title {
     text-transform: uppercase;
     letter-spacing: 0.2rem;
@@ -418,11 +492,20 @@ const Desc = styled.div`
       padding: 2px 0;
     }
   }
+
+  ${mobile(css`
+    flex-direction: column;
+    gap: 1.5rem;
+  `)}
 `;
 
 const DescItem = styled.div`
   text-align: left;
   width: 250px;
+
+  ${mobile(css`
+    width: 100%;
+  `)}
 `;
 
 const ProjectButton = styled.button`
@@ -450,10 +533,16 @@ const ProjectButton = styled.button`
       transform: rotate(-45deg);
     }
   }
+
+  ${mobile(css`
+    width: 2rem;
+    height: 2rem;
+  `)}
 `;
 
 const Review = styled(ContentWrapper)`
   margin: 8rem 0;
+
   & .review_title {
     display: flex;
     justify-content: space-between;
@@ -462,12 +551,21 @@ const Review = styled(ContentWrapper)`
   & .review_text {
     padding: 2rem 0;
   }
+
+  ${mobile(css`
+    margin: 2rem 0;
+
+    & .review_text {
+      padding: 1rem 0;
+    }
+  `)}
 `;
 
 const ReviewItem = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+
+  ${mobile(css``)}
 `;
 
 const ReviewUser = styled.div`
@@ -481,4 +579,10 @@ const ReviewAvatar = styled.div`
   height: 60px;
   border-radius: 60px;
   background: gray;
+
+  ${mobile(css`
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  `)}
 `;

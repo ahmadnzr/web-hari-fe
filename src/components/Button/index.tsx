@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { Text } from "../Text";
+import { mobile } from "@/helpers/theme";
 
 interface Props {
   text?: string;
@@ -30,6 +31,11 @@ const BtnIcon = styled(ArrowRightIcon)`
   width: 16px;
 
   color: ${(props) => props.theme.color["brand-dark"]};
+
+  ${mobile(css`
+    height: 12px;
+    width: 12px;
+  `)}
 `;
 
 const ButtonIconWrapper = styled.div`
@@ -62,6 +68,16 @@ const ButtonIconWrapper = styled.div`
     background: white;
     transition: ${(props) => props.theme.animation.fast};
   }
+
+  ${mobile(css`
+    height: 28px;
+    padding: 0 2px;
+
+    &:before {
+      width: 28px;
+      height: 28px;
+    }
+  `)}
 `;
 
 const ButtonContainer = styled.button`
@@ -115,4 +131,27 @@ const ButtonContainer = styled.button`
       color: ${(props) => props.theme.color["brand-dark"]};
     }
   }
+
+  ${mobile(css`
+    height: 46px;
+    width: 150px;
+
+    gap: 8px;
+
+    border-radius: 50px;
+
+    & .btn-text-icon {
+      margin-left: 10px;
+    }
+
+    &:hover {
+      ${ButtonIconWrapper} {
+        margin-right: 4px;
+      }
+
+      & .btn-text-icon {
+        margin-left: 16px;
+      }
+    }
+  `)}
 `;
