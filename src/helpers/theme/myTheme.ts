@@ -18,11 +18,11 @@ export const myTheme: DefaultTheme = {
   mobile: {
     fontSize: {
       xs: "0.833rem",
-      sm: "1rem",
-      md: "1.2rem",
-      lg: "1.44rem",
-      xl: "1.728rem",
-      xxl: "4rem",
+      sm: "0.8rem",
+      md: "1rem",
+      lg: "1.1rem",
+      xl: "1.4rem",
+      xxl: "1.7rem",
     },
   },
   color: {

@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { Color, FontSize, FontWeight } from "@/helpers/types";
+import { mobile } from "@/helpers/theme";
 
 interface TypographyProps {
   readonly $size: keyof FontSize;
@@ -41,5 +42,9 @@ const Typography = styled.p<TypographyProps>`
     font-size: ${props.theme.fontSize[props.$size]};
     font-weight: ${props.theme.fontWeight[props.$weight]};
     color: ${props.$color ? props.theme.color[props?.$color] : undefined};
+
+    ${mobile(css`
+      font-size: ${props.theme.mobile.fontSize[props.$size]};
+    `)}
   `}
 `;
