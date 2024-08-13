@@ -6,8 +6,8 @@ import { ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import {
   Button,
-  Container,
-  DarkContainer,
+  ContentWrapper,
+  ContentDarkContainer,
   SectionTitle,
   Text,
 } from "@/components";
@@ -189,7 +189,8 @@ export default function Home() {
   );
 }
 
-const Hero = styled(DarkContainer)`
+const Hero = styled(ContentDarkContainer)`
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -293,7 +294,7 @@ const BtnIcon = styled(ArrowRightIcon)`
   color: ${(props) => props.theme.color["brand-dark"]};
 `;
 
-const AboutMe = styled(Container)`
+const AboutMe = styled(ContentWrapper)`
   height: 750px;
   padding: 0 250px;
   display: flex;
@@ -313,7 +314,7 @@ const AboutContent = styled.div`
   flex: 1;
 `;
 
-const Service = styled(DarkContainer)`
+const Service = styled(ContentDarkContainer)`
   text-align: center;
 
   & .service_menu-title {
@@ -451,7 +452,7 @@ const ProjectButton = styled.button`
   }
 `;
 
-const Review = styled(Container)`
+const Review = styled(ContentWrapper)`
   margin: 8rem 0;
   & .review_title {
     display: flex;

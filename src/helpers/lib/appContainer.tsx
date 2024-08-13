@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
-import { Button, DarkContainer, Text } from "@/components";
+import { Button, ContentDarkContainer, Text } from "@/components";
 
 interface Props {
   children: React.ReactNode;
@@ -52,8 +52,7 @@ export const AppContainer = ({ children }: Props) => {
           </Link>
         </NavItem>
       </Navbar>
-
-      {children}
+      <MainContainer>{children}</MainContainer>
 
       <Footer>
         <FooterTitle>
@@ -137,7 +136,12 @@ const NavItem = styled.div<{ $width?: string; $active?: boolean }>`
   }
 `;
 
-const Footer = styled(DarkContainer)`
+const MainContainer = styled.main`
+  width: 95%;
+  margin: 0 auto;
+`;
+
+const Footer = styled(ContentDarkContainer)`
   width: 100%;
   min-height: 900px;
   margin-top: 2rem;

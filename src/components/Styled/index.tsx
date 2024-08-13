@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
-  width: 95%;
+export const ContentWrapper = styled.section`
   padding: 24px;
-  margin: 0 auto;
 `;
 
-export const DarkContainer = styled(Container)`
+export const ContentDarkContainer = styled(ContentWrapper)`
   border-radius: 40px;
 
   color: ${(props) => props.theme.color.light};
