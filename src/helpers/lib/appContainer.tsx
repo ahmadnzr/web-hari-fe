@@ -77,7 +77,9 @@ export const AppContainer = ({ children }: Props) => {
               height={90}
               width={90}
             />
-            <Text $size="lg">Visual Designer Based in Indonesia</Text>
+            <Text className="avatar_title" $size="lg">
+              Visual Designer Based in Indonesia
+            </Text>
           </Avatar>
           <FooterMenu>
             <FooterMenuItem>
@@ -262,7 +264,7 @@ const FooterDetail = styled.div`
   `)}
 
   ${mobile(css`
-    padding: 1rem;
+    padding: 1rem 0;
   `)}
 `;
 
@@ -282,6 +284,9 @@ const Avatar = styled.div`
 
   ${mobile(css`
     width: 100%;
+    .avatar_title {
+      max-width: 200px;
+    }
   `)}
 `;
 
@@ -290,6 +295,7 @@ const FooterMenu = styled.div`
   gap: 6rem;
 
   ${mobile(css`
+    width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
