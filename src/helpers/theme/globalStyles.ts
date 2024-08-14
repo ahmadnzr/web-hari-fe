@@ -48,4 +48,8 @@ export const GlobalStyles = createGlobalStyle`
   #root, #__next {
     isolation: isolate;
   }
+
+  .no-scroll{
+    overflow: hidden;
+  }
 `;

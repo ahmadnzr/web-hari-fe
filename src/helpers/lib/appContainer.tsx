@@ -1,9 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styled, { css } from "styled-components";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import { Button, ContentDarkContainer, Text } from "@/components";
 import { mobile, tablet } from "../theme";
@@ -13,9 +16,103 @@ interface Props {
 }
 
 export const AppContainer = ({ children }: Props) => {
+  const navMenuRef = useRef<HTMLDivElement | null>(null);
+
+  const [openMobileNav, setOpenMobileNav] = useState(false);
+
+  const toggleNavMenu = () => {
+    setOpenMobileNav((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (openMobileNav) {
+      document.documentElement.classList.add("no-scroll");
+      return;
+    } else {
+      document.documentElement.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.documentElement.classList.remove("no-scroll");
+    };
+  }, [openMobileNav]);
+
+  useGSAP(
+    () => {
+      if (navMenuRef.current) {
+        gsap.from(navMenuRef.current.children, {
+          y: 50,
+          opacity: 0,
+          ease: "linear",
+          stagger: {
+            amount: 0.5,
+          },
+        });
+      }
+    },
+    { dependencies: [openMobileNav] },
+  );
+
   return (
     <>
       <Navbar>
+        <MobileNavbar className={openMobileNav ? "open-nav-mobile" : undefined}>
+          <NavHeader>
+            <CloseButton onClick={toggleNavMenu}>
+              <XMarkIcon className="close-btn" />
+            </CloseButton>
+          </NavHeader>
+          <NavItemMobileList ref={navMenuRef}>
+            <Link href="/" onClick={toggleNavMenu}>
+              <Text
+                $color="light"
+                className="nav-menu"
+                $size="xl"
+                $weight="semiBold"
+              >
+                Home
+              </Text>
+            </Link>
+            <Link href="/about" onClick={toggleNavMenu}>
+              <Text
+                $color="light"
+                className="nav-menu"
+                $size="xl"
+                $weight="semiBold"
+              >
+                About
+              </Text>
+            </Link>
+            <Link href="/" onClick={toggleNavMenu}>
+              <Text
+                $color="light"
+                className="nav-menu"
+                $size="xl"
+                $weight="semiBold"
+              >
+                Works
+              </Text>
+            </Link>
+            <Link href="/" onClick={toggleNavMenu}>
+              <Text
+                $color="light"
+                className="nav-menu"
+                $size="xl"
+                $weight="semiBold"
+              >
+                Contact
+              </Text>
+            </Link>
+          </NavItemMobileList>
+          <NavLogo>
+            <Image
+              src="/images/logo/hary.svg"
+              alt="logo"
+              height={40}
+              width={40}
+            />
+          </NavLogo>
+        </MobileNavbar>
         <NavItem $active>
           <Link href="/">
             <Text className="nav-menu" $size="xs" $weight="semiBold">
@@ -52,7 +149,7 @@ export const AppContainer = ({ children }: Props) => {
             </Text>
           </Link>
         </NavItem>
-        <BurgerMenu>
+        <BurgerMenu onClick={toggleNavMenu}>
           <span />
           <span />
           <span />
@@ -125,6 +222,7 @@ const Navbar = styled.nav`
   ${mobile(css`
     justify-content: space-between;
     padding: 0 1rem;
+    height: 70px;
   `)}
 `;
 
@@ -139,10 +237,12 @@ const NavLogo = styled.div`
   `)}
 `;
 
-const BurgerMenu = styled.div`
+const BurgerMenu = styled.button`
   width: 25px;
   height: 15px;
   display: none;
+  border: none;
+  background: none;
 
   & > span {
     display: block;
@@ -328,4 +428,57 @@ const FooterCopy = styled.div`
   ${mobile(css`
     padding: 1rem 0;
   `)}
+`;
+
+const MobileNavbar = styled.div<{ $open?: boolean }>`
+  display: none;
+  transition: ${(props) => props.theme.animation.medium};
+
+  ${mobile(css`
+    position: fixed;
+    z-index: 999;
+    top: 0;
+
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem;
+    right: -100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: ${(props) => props.theme.color.dark};
+    text-align: center;
+
+    &.open-nav-mobile {
+      right: 0;
+    }
+  `)}
+`;
+
+const NavHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const CloseButton = styled.button`
+  width: 30px;
+  height: 30px;
+
+  border-radius: 30px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: ${(props) => props.theme.color.light};
+`;
+
+const NavItemMobileList = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `;
