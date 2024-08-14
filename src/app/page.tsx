@@ -3,6 +3,8 @@
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import {
   Button,
@@ -12,12 +14,73 @@ import {
   Text,
 } from "@/components";
 import { mobile, tablet } from "@/helpers/theme";
+import { useRef } from "react";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const animateScrollListRef = useRef<(HTMLParagraphElement | null)[]>([]);
+
+  const animateItemRef = (el: HTMLParagraphElement | null) => {
+    if (el && !animateScrollListRef.current.includes(el)) {
+      animateScrollListRef.current.push(el);
+    }
+  };
+
+  useGSAP(
+    () => {
+      gsap
+        .timeline({ defaults: { ease: "power3.out", duration: 2 } })
+        .from("#hero-detail > *", {
+          y: 30,
+          opacity: 0,
+          stagger: {
+            each: 0.2,
+          },
+        })
+        .from(
+          "#hero-highlight > *",
+          {
+            y: 50,
+            opacity: 0,
+            stagger: {
+              each: 0.2,
+            },
+          },
+          "<",
+        );
+    },
+    { scope: heroRef },
+  );
+
+  useGSAP(() => {
+    animateScrollListRef.current.forEach((el) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              end: "bottom 60%",
+              scrub: 1,
+            },
+          },
+        );
+      }
+    });
+  });
+
   return (
     <main>
-      <Hero>
-        <HeroDetail>
+      <Hero ref={heroRef}>
+        <HeroDetail id="hero-detail">
           <Text className="hero-title" $weight="bold" $size="xxl">
             Visual Designer Based in Indonesia
           </Text>
@@ -28,7 +91,7 @@ export default function Home() {
           </Text>
           <Button text="Contact Me" />
         </HeroDetail>
-        <HeroHighlight>
+        <HeroHighlight id="hero-highlight">
           <HeroCard $url="https://www.whiteboardjournal.com/wp-content/uploads/2023/06/nothing-phone-2-specs-leak-summer-release-1050x591.jpg">
             <CardContent>
               <Text $size="lg" $weight="bold" style={{ lineHeight: "100%" }}>
@@ -71,8 +134,9 @@ export default function Home() {
           </HeroCard>
         </HeroHighlight>
       </Hero>
+
       <AboutMe>
-        <AboutContent>
+        <AboutContent ref={animateItemRef}>
           <SectionTitle>About Me</SectionTitle>
           <Image
             className="about_photo"
@@ -82,7 +146,7 @@ export default function Home() {
             width={230}
           />
         </AboutContent>
-        <AboutContent>
+        <AboutContent ref={animateItemRef}>
           <Text $size="xl" $weight="semiBold">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy
@@ -90,27 +154,53 @@ export default function Home() {
           </Text>
         </AboutContent>
       </AboutMe>
+
       <Service>
-        <SectionTitle>What I&apos;m doing</SectionTitle>
-        <ServiceMenu>
-          <Text $size="xxl" $weight="semiBold" className="service_menu-title">
+        <SectionTitle ref={animateItemRef}>What I&apos;m doing</SectionTitle>
+        <ServiceMenu id="service_menu">
+          <Text
+            ref={animateItemRef}
+            $size="xxl"
+            $weight="semiBold"
+            className="service_menu-title"
+          >
             Branding Design
           </Text>
-          <Text $size="xxl" $weight="semiBold" className="service_menu-title">
+          <Text
+            ref={animateItemRef}
+            $size="xxl"
+            $weight="semiBold"
+            className="service_menu-title"
+          >
             UI/UX Design
           </Text>
-          <Text $size="xxl" $weight="semiBold" className="service_menu-title">
+          <Text
+            ref={animateItemRef}
+            $size="xxl"
+            $weight="semiBold"
+            className="service_menu-title"
+          >
             Development
           </Text>
-          <Text $size="xxl" $weight="semiBold" className="service_menu-title">
+          <Text
+            ref={animateItemRef}
+            $size="xxl"
+            $weight="semiBold"
+            className="service_menu-title"
+          >
             Illustration
           </Text>
-          <Text $size="xxl" $weight="semiBold" className="service_menu-title">
+          <Text
+            ref={animateItemRef}
+            $size="xxl"
+            $weight="semiBold"
+            className="service_menu-title"
+          >
             Logo Creation
           </Text>
         </ServiceMenu>
         <Project>
-          <div className="service_project-title">
+          <div ref={animateItemRef} className="service_project-title">
             <SectionTitle>Selected Project</SectionTitle>
             <SlideButton>
               <NavigationButton $type="prev">
@@ -121,7 +211,10 @@ export default function Home() {
               </NavigationButton>
             </SlideButton>
           </div>
-          <ProjectCard $url="https://i.ytimg.com/vi/1a1C3VeJEl0/maxresdefault.jpg">
+          <ProjectCard
+            ref={animateItemRef}
+            $url="https://i.ytimg.com/vi/1a1C3VeJEl0/maxresdefault.jpg"
+          >
             <Text $color="gray" className="project_card-title">
               20/04/2024
             </Text>
@@ -155,7 +248,7 @@ export default function Home() {
         </Project>
       </Service>
       <Review>
-        <div className="review_title">
+        <div ref={animateItemRef} className="review_title">
           <SectionTitle>Past Client</SectionTitle>
           <SlideButton>
             <NavigationButton $type="prev" $dark>
@@ -167,13 +260,18 @@ export default function Home() {
           </SlideButton>
         </div>
         <ReviewItem>
-          <Text className="review_text" $size="xl" $weight="semiBold">
+          <Text
+            ref={animateItemRef}
+            className="review_text"
+            $size="xl"
+            $weight="semiBold"
+          >
             Hari transformed our brand identity and website into a modern, sleek
             and professional representation of our company. Their design skills
             are second to none
           </Text>
-          <ReviewUser>
-            <ReviewAvatar></ReviewAvatar>
+          <ReviewUser ref={animateItemRef}>
+            <ReviewAvatar />
             <div>
               <Text $weight="semiBold" $size="md">
                 Ahmad Nizar
