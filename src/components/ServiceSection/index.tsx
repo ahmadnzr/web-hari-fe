@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import styled, { css } from "styled-components";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { mobile } from "@/helpers/theme";
@@ -11,6 +12,8 @@ import { ContentDarkContainer, SlideButton } from "../Styled";
 import { SectionTitle } from "../SectionTitle";
 import { Text } from "../Text";
 import { NavigationButton } from "../NavigationButton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ServiceSection = () => {
   const animateScrollListRef = useRef<(HTMLDivElement | null)[]>([]);
