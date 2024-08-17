@@ -6,8 +6,22 @@ import styled, { css } from "styled-components";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { ContentWrapper, ServiceSection, Text } from "@/components";
+import {
+  ContentWrapper,
+  SectionTitle,
+  ServiceSection,
+  Text,
+} from "@/components";
 import { mobile, tablet } from "@/helpers/theme";
+
+const experiences = [
+  {
+    date: "2022 - Present",
+    title: "Senior Designer GoTo",
+  },
+  { date: "2019 - 2022", title: "UI/UX Designer at Shoppy" },
+  { date: "2015 - 2029", title: "Junior Designer at MyBank" },
+];
 
 const Page = () => {
   const aboutRef = useRef<HTMLDivElement | null>(null);
@@ -66,6 +80,33 @@ const Page = () => {
         </AboutContent>
       </AboutMe>
       <ServiceSection />
+      <Expreiences>
+        <Left>
+          <SectionTitle>Experiences</SectionTitle>
+          <Text className="experience_desc" $color="dark-gray">
+            Didn’t expect Myspace to be a career-launcher, but that’s how I got
+            my start in design. As a mostly self-taught designer, I’ve worked
+            for startups, agencies, and even solo. These days I’m based in
+            Denver—but I’m a big remote work advocate.
+          </Text>
+        </Left>
+        <Right>
+          {experiences.map((item) => (
+            <ExperinceItem key={item.date}>
+              <Text className="experience-item_title" $color="gray">
+                {item.date}
+              </Text>
+              <Text
+                className="experience-item_desc"
+                $weight="semiBold"
+                $size="lg"
+              >
+                {item.title}
+              </Text>
+            </ExperinceItem>
+          ))}
+        </Right>
+      </Expreiences>
     </>
   );
 };
@@ -119,4 +160,68 @@ const ClientContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+`;
+
+const Expreiences = styled(ContentWrapper)`
+  min-height: 40dvh;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding: 4rem 2rem;
+
+  & .experience_desc {
+    max-width: 400px;
+    text-align: justify;
+  }
+
+  ${tablet(css`
+    flex-direction: column;
+
+    & .experience_desc {
+      max-width: 100%;
+    }
+  `)}
+
+  ${mobile(css`
+    padding: 2rem 1rem;
+  `)}
+`;
+
+const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+`;
+
+const Right = styled.div`
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+`;
+
+const ExperinceItem = styled.div`
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid ${(props) => props.theme.color.gray};
+
+  & .experience-item_title {
+    letter-spacing: 0.5rem;
+    flex: 1;
+  }
+
+  & .experience-item_desc {
+    text-align: right;
+    flex: 0.5;
+  }
+
+  ${tablet(css`
+    & .experience-item_desc {
+      flex: 1;
+    }
+  `)}
 `;
