@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useRef } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -20,6 +21,7 @@ export const AnimationContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const pathname = usePathname();
   const animateScrollListRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const animateItemRef = (el: HTMLDivElement | null) => {
@@ -48,7 +50,7 @@ export const AnimationContextProvider = ({
         );
       }
     });
-  });
+  }, [pathname]);
 
   return (
     <AnimationContext.Provider
