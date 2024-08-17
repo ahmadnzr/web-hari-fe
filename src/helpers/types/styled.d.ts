@@ -19,6 +19,7 @@ export interface FontWeight {
 export interface Color {
   "brand-dark": string;
   "brand-light": string;
+  "dark-gray": string;
   dark: string;
   light: string;
   gray: string;

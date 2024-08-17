@@ -1,5 +1,6 @@
 "use client";
 
+import { useContext, useRef } from "react";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -17,20 +18,11 @@ import {
   ServiceSection,
 } from "@/components";
 import { mobile, tablet } from "@/helpers/theme";
-import { useRef } from "react";
-import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
+import { AnimationContext } from "@/helpers/lib";
 
 export default function Home() {
+  const { animateItemRef } = useContext(AnimationContext);
   const heroRef = useRef<HTMLDivElement | null>(null);
-  const animateScrollListRef = useRef<(HTMLParagraphElement | null)[]>([]);
-
-  const animateItemRef = (el: HTMLParagraphElement | null) => {
-    if (el && !animateScrollListRef.current.includes(el)) {
-      animateScrollListRef.current.push(el);
-    }
-  };
 
   useGSAP(
     () => {
@@ -57,28 +49,6 @@ export default function Home() {
     },
     { scope: heroRef },
   );
-
-  useGSAP(() => {
-    animateScrollListRef.current.forEach((el) => {
-      if (el) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              end: "bottom 60%",
-              scrub: 1,
-            },
-          },
-        );
-      }
-    });
-  });
 
   return (
     <main>

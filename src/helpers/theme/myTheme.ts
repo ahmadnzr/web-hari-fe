@@ -28,6 +28,7 @@ export const myTheme: DefaultTheme = {
   color: {
     "brand-dark": "rgb(255, 146, 104)",
     "brand-light": "rgb(249, 92, 31)",
+    "dark-gray": "#54545d",
     dark: "#131315",
     light: "#fff",
     gray: "#c4c4c4",

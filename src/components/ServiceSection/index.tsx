@@ -1,50 +1,18 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { mobile } from "@/helpers/theme";
+import { AnimationContext } from "@/helpers/lib";
 import { ContentDarkContainer, SlideButton } from "../Styled";
 import { SectionTitle } from "../SectionTitle";
 import { Text } from "../Text";
 import { NavigationButton } from "../NavigationButton";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export const ServiceSection = () => {
-  const animateScrollListRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  const animateItemRef = (el: HTMLParagraphElement | null) => {
-    if (el && !animateScrollListRef.current.includes(el)) {
-      animateScrollListRef.current.push(el);
-    }
-  };
-
-  useGSAP(() => {
-    animateScrollListRef.current.forEach((el) => {
-      if (el) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              end: "bottom 60%",
-              scrub: 1,
-            },
-          },
-        );
-      }
-    });
-  });
+  const { animateItemRef } = useContext(AnimationContext);
 
   return (
     <Service>
