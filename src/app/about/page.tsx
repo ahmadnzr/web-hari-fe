@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import gsap from "gsap";
@@ -13,6 +13,7 @@ import {
   Text,
 } from "@/components";
 import { mobile, tablet } from "@/helpers/theme";
+import { AnimationContext } from "@/helpers/lib";
 
 const experiences = [
   {
@@ -24,6 +25,7 @@ const experiences = [
 ];
 
 const Page = () => {
+  const { animateItemRef } = useContext(AnimationContext);
   const aboutRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
@@ -82,8 +84,12 @@ const Page = () => {
       <ServiceSection />
       <Expreiences>
         <Left>
-          <SectionTitle>Experiences</SectionTitle>
-          <Text className="experience_desc" $color="dark-gray">
+          <SectionTitle ref={animateItemRef}>Experiences</SectionTitle>
+          <Text
+            ref={animateItemRef}
+            className="experience_desc"
+            $color="dark-gray"
+          >
             Didn’t expect Myspace to be a career-launcher, but that’s how I got
             my start in design. As a mostly self-taught designer, I’ve worked
             for startups, agencies, and even solo. These days I’m based in
@@ -92,7 +98,7 @@ const Page = () => {
         </Left>
         <Right>
           {experiences.map((item) => (
-            <ExperinceItem key={item.date}>
+            <ExperinceItem key={item.date} ref={animateItemRef}>
               <Text className="experience-item_title" $color="gray">
                 {item.date}
               </Text>

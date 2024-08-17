@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import {
+  AnimationContextProvider,
   AppContainer,
   MyThemeProvider,
   StyledComponentsRegistry,
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <MyThemeProvider>
-            <AppContainer>{children}</AppContainer>
+            <AnimationContextProvider>
+              <AppContainer>{children}</AppContainer>
+            </AnimationContextProvider>
           </MyThemeProvider>
         </StyledComponentsRegistry>
       </body>
