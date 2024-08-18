@@ -120,7 +120,7 @@ const NavbarContainer = styled.nav`
   ${mobile(css`
     justify-content: space-between;
     padding: 0 1rem;
-    height: 70px;
+    height: 60px;
   `)}
 `;
 
