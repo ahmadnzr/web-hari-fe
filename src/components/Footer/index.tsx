@@ -116,8 +116,12 @@ const FooterTitle = styled.div`
 
   text-align: center;
 
-  ${mobile(css`
+  ${tablet(css`
     width: 100%;
+    padding: 2rem;
+  `)}
+
+  ${mobile(css`
     padding: 1rem;
 
     gap: 1rem;
