@@ -1,42 +1,32 @@
-import React, { forwardRef } from "react";
+import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 import { Color, FontSize, FontWeight } from "@/helpers/types";
 import { mobile } from "@/helpers/theme";
 
 interface TypographyProps {
-  readonly $size: keyof FontSize;
-  readonly $weight: keyof FontWeight;
-  readonly $color?: keyof Color;
+  $size: keyof FontSize;
+  $weight: keyof FontWeight;
+  $color?: keyof Color;
 }
 
-interface Props extends Partial<TypographyProps> {
-  children: string;
-  className?: string;
-  style?: React.CSSProperties;
-}
+interface Props
+  extends HTMLAttributes<HTMLParagraphElement>,
+    Partial<TypographyProps> {}
 
-export const Text = forwardRef<HTMLParagraphElement, Props>(
-  (
-    { children, className, style, $color, $size = "sm", $weight = "normal" },
-    ref,
-  ) => {
-    return (
-      <Typography
-        ref={ref}
-        className={className}
-        style={style}
-        $color={$color}
-        $size={$size}
-        $weight={$weight}
-      >
-        {children}
-      </Typography>
-    );
-  },
-);
-
-Text.displayName = "Text";
+export const Text = ({
+  children,
+  $color,
+  $size = "sm",
+  $weight = "normal",
+  ...other
+}: Props) => {
+  return (
+    <Typography $color={$color} $size={$size} $weight={$weight} {...other}>
+      {children}
+    </Typography>
+  );
+};
 
 const Typography = styled.p<TypographyProps>`
   ${(props) => css`

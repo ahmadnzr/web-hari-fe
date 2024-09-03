@@ -1,17 +1,18 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-import { Text } from "../Text";
 import { mobile } from "@/helpers/theme";
 
-interface Props {
+import { Text } from "../Text";
+
+interface Props extends HTMLAttributes<HTMLButtonElement> {
   text?: string;
 }
 
-export const Button = ({ text = "" }: Props) => {
+export const Button = ({ text = "", ...other }: Props) => {
   return (
-    <ButtonContainer>
+    <ButtonContainer {...other}>
       <ButtonIconWrapper>
         <Text className="btn-text-icon" $weight="semiBold">
           {text}
