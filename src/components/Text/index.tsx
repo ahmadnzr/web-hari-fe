@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 import { Color, FontSize, FontWeight } from "@/helpers/types";
@@ -14,19 +14,27 @@ interface Props
   extends HTMLAttributes<HTMLParagraphElement>,
     Partial<TypographyProps> {}
 
-export const Text = ({
-  children,
-  $color,
-  $size = "sm",
-  $weight = "normal",
-  ...other
-}: Props) => {
-  return (
-    <Typography $color={$color} $size={$size} $weight={$weight} {...other}>
-      {children}
-    </Typography>
-  );
-};
+export const Text = forwardRef<HTMLParagraphElement, Props>(
+  (
+    { children, className, style, $color, $size = "sm", $weight = "normal" },
+    ref,
+  ) => {
+    return (
+      <Typography
+        ref={ref}
+        className={className}
+        style={style}
+        $color={$color}
+        $size={$size}
+        $weight={$weight}
+      >
+        {children}
+      </Typography>
+    );
+  },
+);
+
+Text.displayName = "Text";
 
 const Typography = styled.p<TypographyProps>`
   ${(props) => css`
